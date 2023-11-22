@@ -22,7 +22,8 @@ def get_google_books_data(title, author):
                 'Categories': ', '.join(book_data.get('categories', [])),
                 'AverageRating': book_data.get('averageRating', ''),
                 'RatingsCount': book_data.get('ratingsCount', ''),
-                'Description': book_data.get('description', '')
+                'Description': book_data.get('description', ''),
+                'ISBN': book_data.get('industryIdentifiers', [{}])[0].get('identifier', '')
             }
     return {
         'Publisher': '',
@@ -31,7 +32,8 @@ def get_google_books_data(title, author):
         'Categories': '',
         'AverageRating': '',
         'RatingsCount': '',
-        'Description': ''
+        'Description': '',
+        'ISBN': ''
     }
 
 def enrich_goodreads_data(goodreads_csv, enriched_csv):
@@ -39,7 +41,7 @@ def enrich_goodreads_data(goodreads_csv, enriched_csv):
     df = pd.read_csv(goodreads_csv)
 
     # Add columns for the additional data
-    additional_columns = ['Publisher', 'PublishedDate', 'PageCount', 'Categories', 'AverageRating', 'RatingsCount', 'Description']
+    additional_columns = ['Publisher', 'PublishedDate', 'PageCount', 'Categories', 'AverageRating', 'RatingsCount', 'Description', 'ISBN']
     for col in additional_columns:
         df[col] = ''
 
@@ -59,5 +61,5 @@ def enrich_goodreads_data(goodreads_csv, enriched_csv):
 df = pd.DataFrame()
 df.head()
 
-enrich_goodreads_data('books.csv', 'enriched_books.csv')
+enrich_goodreads_data('books.csv', './enriched_books.csv')
 
