@@ -64,5 +64,5 @@ def enrich_goodreads_data(goodreads_csv, enriched_csv):
 df = pd.DataFrame()
 df.head()
 
-enrich_goodreads_data('./MyBooks/books.csv', './MyBooks/enriched_books.csv')
+enrich_goodreads_data('./MyBooksData/books.csv', './MyBooksData/enriched_books.csv')
 

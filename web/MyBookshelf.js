@@ -42,25 +42,32 @@ d3.csv('./../MyBooks/books.csv')
             var cells = rows.selectAll("td")
                 .data(function (row) {
                     return columns.map(function (column) {
-                        return { column: column, value: row[column] };
+                        return { column: column, value: row[column], image: row['Image_Path']  };
                     });
                 })
                 .enter()
                 .append("td")
                 .attr("style", "font-family: Courier") // sets the font style
-                .html(function (d) { return d.value; });
+                .html(function (d) {
+                    // Check if the column is for images and create an img element if so
+                    if (d.column === 'Image_Path') {
+                        return "<img src='" + d.value + "' width='50' height='75'>"; // Adjust width and height as needed
+                    }
+                    return d.value;
+                });
 
             return table;
         }
 
         // render the table
-        var peopleTable = tabulate(data, ["Title", "Author", "ISBN","Number of Pages"]);
+        var peopleTable = tabulate(data, ["Book Id","Title", "Author", "ISBN","Number of Pages"]);
 
         // Create a function to render the bookshelf
         function renderBookshelf(data) {
             // Select all book covers
-            // const books = bookGroup.selectAll(".book")
-            //     .data(data);
+            
+             const books = bookGroup.selectAll(".book")
+                 .data(data);
 
             // Enter new books
             const newBooks = books.enter()
@@ -76,7 +83,7 @@ d3.csv('./../MyBooks/books.csv')
 
             // // Append book titles and authors
             newBooks.append("text")
-                .text(d => `${d.title} by ${d.author}`)
+                .text(d => `${d.Title} by ${d.Author}`)
                 .attr("y", 170)
                 .attr("x", 50)
                 .attr("text-anchor", "middle");

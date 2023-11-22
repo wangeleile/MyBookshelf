@@ -28,8 +28,8 @@ def download_images_from_csv(csv_file_path, download_folder):
                 print(f"An error occurred while downloading {url}. Error: {e}")
 
 # Example usage:
-csv_file_path = './MyBooks/enriched_books.csv'  # Replace with the path to your CSV file
-download_folder = './MyBooks/bookimages'  # Replace with your desired download path
+csv_file_path = './MyBooksData/enriched_books.csv'  # Replace with the path to your CSV file
+download_folder = './MyBooksData/bookimages'  # Replace with your desired download path
 
 # Call the function
 download_images_from_csv(csv_file_path, download_folder)
