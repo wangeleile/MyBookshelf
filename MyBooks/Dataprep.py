@@ -1,13 +1,14 @@
 import pandas as pd
 
 import requests
+import config
 
 def get_google_books_data(title, author):
     params = {
         'q': f'intitle:{title}+inauthor:{author}',
         'maxResults': 1,
         'printType': 'books',
-        'key': 'AIzaSyBfsmpvdmzVj94N_OQPXLw2yNpQD_JBb6Q'
+        'key': config.API_KEY
     }
     url = "https://www.googleapis.com/books/v1/volumes"
     response = requests.get(url, params=params)
